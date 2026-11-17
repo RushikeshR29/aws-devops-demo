@@ -23,5 +23,5 @@ test('GET / returns the home page', async () => {
   const res = await fetch(`${baseUrl}/`);
   assert.strictEqual(res.status, 200);
   const text = await res.text();
-  assert.match(text, /Deployed with GitHub Actions/);
+  assert.match(text, /Deployed with Jenkins/);
 });
