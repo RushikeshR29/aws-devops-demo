@@ -10,10 +10,10 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_USER = 'your-dockerhub-username'      // <-- change this
+        DOCKERHUB_USER = 'rushiikesh29'
         IMAGE_NAME     = "${DOCKERHUB_USER}/aws-devops-demo"
         IMAGE_TAG      = "${env.BUILD_NUMBER}"
-        EC2_HOST       = 'your-app-server-public-ip'    // <-- change this
+        EC2_HOST       = '172.31.15.127'   // app-server PRIVATE IP (SSH allowed only from jenkins-sg)
         EC2_USER       = 'ec2-user'
     }
 
@@ -38,7 +38,12 @@ pipeline {
                     reuseNode true
                 }
             }
+            environment {
+                // Container runs as the jenkins user (no home dir), so keep npm's cache in the workspace
+                npm_config_cache = "${WORKSPACE}/.npm"
+            }
             steps {
+                sh 'rm -rf node_modules'
                 sh 'npm ci'
                 sh 'npm test'
             }
@@ -100,7 +105,7 @@ pipeline {
             sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest || true"
         }
         success {
-            echo "Deployed build ${IMAGE_TAG} to http://${EC2_HOST}"
+            echo "Deployed build ${IMAGE_TAG} - open the app-server PUBLIC IP in your browser"
         }
         failure {
             echo 'Pipeline failed - check the stage logs above.'

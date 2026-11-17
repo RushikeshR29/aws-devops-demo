@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   <style>body{font-family:system-ui,sans-serif;max-width:640px;margin:60px auto;padding:0 16px;color:#222}
   code{background:#f2f2f2;padding:2px 6px;border-radius:4px}</style></head>
   <body>
-    <h1>Deployed with GitHub Actions to AWS EC2</h1>
+    <h1>Deployed with Jenkins to AWS EC2</h1>
     <p>Version: <code>${process.env.APP_VERSION || 'local'}</code></p>
     <p>Container host: <code>${os.hostname()}</code></p>
     <p>Started: <code>${startedAt.toISOString()}</code></p>

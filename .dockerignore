@@ -1,8 +1,9 @@
 node_modules
 npm-debug.log
 .git
-.github
 test
 *.md
 docker-compose.yml
 scripts
+Jenkinsfile
+.npm
