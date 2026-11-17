@@ -1,0 +1,17 @@
+{
+  "name": "aws-devops-demo",
+  "version": "1.0.0",
+  "description": "Node.js app containerized with Docker and deployed to AWS EC2 via GitHub Actions",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "license": "MIT"
+}
